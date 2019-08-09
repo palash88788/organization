@@ -1,0 +1,62 @@
+<div class="col-sm-12 ">
+    
+        <button type="button " class="btn add-btn " data-toggle="modal " data-target=".bd-example-modal-sm ">Applicants</button>
+        <input type="search" [(ngModel)]="nameSearch.first_name" [ngModelOptions]="{standalone: true}" class="Search-ad form-control" placeholder="Search" />
+        <div class="table-responsive ">
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th scope="col " class="text-center ">Image</th>
+
+                    <th scope="col "><span style="min-width: 120px">First Name</span>   </th>
+                    <th scope="col ">Last Name</th>
+                    <th scope="col ">Email Id</th>
+                    <th scope="col ">Contact No</th>
+                    <th scope="col " class="text-center ">Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody *ngIf="!jobDatas || jobDatas.length == 0 ">
+                <tr class="text-center p-4">
+                    <th colspan="6"> No Data Found</th>
+
+                </tr>
+
+            </tbody>
+
+            <tbody *ngIf="jobDatas && jobDatas.length > 0 ">
+
+                <tr *ngFor="let applicant of jobDatas | jobApplicantFilter:nameSearch">
+                    <td><img src="{{applicant.user_detail.avatar_image}}" style=" width: 29px; "></td>
+                    <td><span style="min-width: 120px">{{applicant.user_detail.first_name}}</span>  </td>
+                    <td>{{applicant.user_detail.last_name}}</td>
+                    <td>{{applicant.user_detail.email_id}}</td>
+                    <td>{{applicant.user_detail.contact_no}}</td>
+
+
+                    <td>
+                        <div class="action_btn " *ngIf="applicant.status==1">
+                            <button class="accept" (click)="onAccept(applicant)">Accept</button>
+                            <button class="Delete" (click)="onReject(applicant)">Reject</button>
+                        </div>
+                        <div class="action_btn " *ngIf="applicant.status==2">
+                            <p style="color: green;">Accepted </p>
+
+                        </div>
+
+                        <div class="action_btn " *ngIf="applicant.status==3">
+                            <p style="color: red;">Declined </p>
+
+                        </div>
+
+                    </td>
+                </tr>
+
+
+            </tbody>
+
+
+        </table>
+    </div>
+</div>

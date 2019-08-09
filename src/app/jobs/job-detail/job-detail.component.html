@@ -1,0 +1,114 @@
+<section class="new-job">
+    <div style="    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 17px 7px;">
+        <h4> Job Detail</h4>
+
+
+
+    </div>
+
+    <div class="row my-2">
+        <div class="col-sm-12 col-md-12">
+
+            <div class="card job-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="card-title">{{jobs?.job_name}} &nbsp;
+                                <span><i class="fa fa-map-marker" aria-hidden="true" style="color:#7eca86"></i>
+                                </span> &nbsp;<span>{{jobs?.address}}</span> </h5>
+                            <!-- <p>{{job?.orgnization_info.first_name}}</p> -->
+                        </div>
+                        <div class="col-md-3">
+                            <h5 class="card-title">Number of adhocs needed :
+                                <span>{{jobs?.no_applicants_required}}</span></h5>
+                        </div>
+                        <div class="col-md-3">
+                            <h5 class="card-title">Reply deadline :
+                                <span>{{jobs?.application_deadline | dateFormatPipe}}</span></h5>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 8px;                                      ">
+                        <div class="col-md-6">
+                            <h5 class="card-text">{{jobs?.desc}} </h5>
+                        </div>
+                        <div class="col-md-6 time">
+                            <div class="row ">
+                                <div class="col-md-4" style="border-right:1px solid grey">JOB INTERVIEW
+                                    DURATION<br>{{jobs?.interview_start_time}} - {{jobs?.interview_end_time}}</div>
+                                <div class="col-md-4" style="border-right:1px solid grey">JOB START
+                                    DATE<br>{{jobs?.job_start_date | dateFormatPipe }}</div>
+                                <div class="col-md-4">JOB END DATE<br>{{jobs?.job_end_date | dateFormatPipe}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="pd-10">
+                    <h3 class="mgbt-xs-15 font-semibold"> Organization Info
+                        </h3>
+                    <div class="col-md-8 time">
+                            <div class="row ">
+                                
+                                <div class="col-md-4" style="border-right:1px solid grey">ORGANZATION NAME<br>{{jobs?.organization_info.first_name}} - {{jobs?.organization_info.last_name}}</div>
+                                
+                                <div class="col-md-4">EMAIL<br>{{jobs?.organization_info.email_id}}</div>
+                            </div>
+                        </div>
+
+  <hr class="pd-5">
+                    <div class="row">
+                        <div class="col-sm-12 mgbt-xs-20">
+                            <h3 class="mgbt-xs-15 font-semibold"> Skills
+                            </h3>
+
+                            <div class="pd-5">
+
+
+                                <div class="chip-side">
+
+                                    <div class="chip" *ngFor="let enterest of jobs?.Job_interest_detail">
+
+                                        {{enterest.interest_Detail.interest_name}}
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="pd-5">
+
+                    <div class="row">
+                        <div class="col-sm-12 mgbt-xs-20">
+                            <h3 class="mgbt-xs-15 font-semibold"> Documents
+                            </h3>
+
+                            <div class="pd-20" style="display: flex;">
+                                    <div class="chipsas mx-2" *ngFor="let doc of jobs?.docs">
+                                            <a href="{{doc.job_doc_url}}" target="_blank ">
+        
+                                                <img *ngIf="doc.imageTag == 'png' || doc.imageTag == 'jpg' || doc.imageTag == 'jpeg'"
+                                                    src="{{doc.job_doc_url}}" data-toggle="tooltip" data-placement="left" style="  width: 50px;
+                                                                height: 50px;" title="Click here to Download">
+        
+                                            </a>
+        
+                                            <a href="{{doc.job_doc_url}}" target="_blank" style="position: relative;">
+        
+                                                <img *ngIf="doc.imageTag != 'png' && doc.imageTag != 'jpg' && doc.imageTag != 'jpeg'"
+                                                    src="assets/img/pdf.png" data-toggle="tooltip" data-placement="left"
+                                                    style="    width: 50px;" title="Click here to Download"></a>
+        
+                                        </div>
+                               
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

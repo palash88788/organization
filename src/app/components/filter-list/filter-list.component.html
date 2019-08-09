@@ -1,0 +1,54 @@
+<section class="new-job">
+    <div class="jopdiv" style="    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 17px 7px;">
+        <h4> Filter List</h4>
+        <input type="search" [(ngModel)]="nameSearch.title" [ngModelOptions]="{standalone: true}" class="Search-ad form-control" placeholder="Search" />
+
+
+    </div>
+
+    <div class="row my-2" *ngFor="let filter of filterList | filterListFilter:nameSearch">
+        <div class="col-sm-12 col-md-12">
+
+            <div class="card job-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="card-title">{{filter?.title}} &nbsp;
+                                    <span><i class="fa fa-map-marker" aria-hidden="true" style="color:#7eca86"></i>
+                                    </span> &nbsp;<span>{{filter?.address}}</span>
+                            </h5>
+                            <!-- <p>{{job?.orgnization_info.first_name}}</p> -->
+                        </div>
+                        <!-- <div class="col-md-3">
+                            <h5 class="card-title">Number of adhocs needed : <span>{{job?.no_applicants_required}}</span></h5>
+                        </div>
+                        <div class="col-md-3">
+                            <h5 class="card-title">Reply deadline : <span>{{job?.application_deadline}}</span></h5>
+                        </div> -->
+                    </div>
+                    <div class="row" style="padding-top: 8px;">
+                        <div class="col-md-4">
+                            <h5 class="card-text">{{filter?.desc}} </h5>
+                        </div>
+                        <div class="col-md-6 time">
+                            <div class="row ">
+                                <div class="col-md-4" style="border-right:1px solid grey">JOB INTERVIEW DURATION<br>{{filter?.interview_start_time }} - {{filter?.interview_end_time }} </div>
+                                <div class="col-md-4" style="border-right:1px solid grey">JOB START DATE<br>{{filter?.job_start | dateFormatPipe}}</div>
+                                <div class="col-md-4">JOB END DATE<br>{{filter?.job_end | dateFormatPipe}}</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <a [routerLink]="['/filter/filter-detail',filter?.filter_id]" type="buttn" class="btn btn-job">View</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

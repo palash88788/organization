@@ -1,0 +1,423 @@
+<!-- Layout -->
+<div class="layout">
+
+
+    <!-- Start of Sidebar -->
+    <div class="sidebar1">
+        <div class="container">
+            <div class="tab-content">
+                <!-- Start of Discussions -->
+                <div class="tab-pane fade show active" id="conversations" role="tabpanel">
+                    <!-- <div class="top">
+                            <input type="search" class="form-control" placeholder="Search">
+                        </div> -->
+                    <div class="middle">
+                        <h4>Create Group</h4>
+                        <button type="button" class="btn round" data-toggle="modal" (click)="resetModal()"
+                            data-target="#compose"><i class="fa fa-user-plus" aria-hidden="true"></i></button>
+                        <hr>
+                        <div  class="alert alert-danger" *ngIf = "!job||!job.search_response.conversations">
+                            <strong>No Applicants Available</strong> 
+                               </div>
+                        <ul class="nav discussions" role="tablist" *ngIf="job&&job.search_response.conversations">
+                            <li *ngFor="let applicant of job.search_response.conversations;let m =index"
+                                (click)="chatGroupDetail(applicant,m)" [ngClass]="{'active-chat':applicant.isSelected}">
+                           
+                                           <a  *ngIf = "applicant.members && applicant.members.length > 0">
+                                <a href="#chat1" class="filter direct" data-chat="open" data-toggle="tab"
+                                    role="tab" aria-controls="chat1" aria-selected="true" (click)="showChat()">
+                                    <div class="status online">
+                                        <img *ngIf="applicant.conversation_image" src="{{applicant.conversation_image}}"
+                                            alt="avatar">
+                                        <img *ngIf="!applicant.conversation_image" src="assets/img/group.svg"
+                                            alt="avatar">
+
+                                        <i data-eva="radio-button-on"></i></div>
+                                    <div class="content">
+
+                                        <div class="headline">
+                                            <h5>{{applicant.conversation_name}}</h5>
+                                            <span>{{applicant.updatedAt }}</span>
+                                        </div>
+                                        <p *ngIf="applicant.last_message&&applicant.last_message.text">
+                                            {{applicant.last_message.text}}</p>
+                                    </div>
+                                </a>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <!-- End of Discussions -->
+
+            </div>
+        </div>
+    </div>
+    <!-- End of Sidebar -->
+    <!-- Start of Chat -->
+    <div class="chat" id="chat_id">
+        <div class="tab-content">
+            <!-- Start of Chat Room -->
+            <div class="tab-pane fade show active" id="chat1" role="tabpanel">
+                <div class="item">
+                    <div class="content">
+                        <div class="container" *ngIf="groupInfo&&groupInfo">
+                            <div class="top">
+                                <div class="headline">
+                                    <img *ngIf="groupInfo.conversation_image" src="{{groupInfo.conversation_image}}"
+                                        alt="avatar">
+                                    <img *ngIf="!groupInfo.conversation_image" src="assets/img/group.svg" alt="avatar">
+                                    <div class="content">
+                                        <h5>{{groupInfo.conversation_name}}</h5>
+                                        <span data-utility="open">Away</span>
+                                    </div>
+                                </div>
+                                <ul>
+                                    <li><button type="button" class="btn"><i data-eva="video"
+                                                data-eva-animation="pulse"></i></button></li>
+                                    <li><button type="button" class="btn"><i data-eva="phone"
+                                                data-eva-animation="pulse"></i></button></li>
+                                    <li><button type="button" class="btn" data-toggle="modal" data-target="#imageUp"></button></li>
+                                    <li><button type="button" class="btn"><i class="fa fa-exclamation-circle"
+                                                (click)="toggle()" aria-hidden="true"></i></button></li>
+                                    <li><button type="button" class="btn round" (click)="closeChatUi()"><i class="fa fa-arrow-left"
+                                                aria-hidden="true"></i></button></li>
+                                    <li><button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false"><i class="fa fa-ellipsis-v"
+                                                aria-hidden="true"></i></button>
+                                        <div class="dropdown-menu">
+
+                                            <button type="button" class="dropdown-item" data-toggle="modal"
+                                                data-target="#compose"><i data-eva="person-edit"></i>Add people</button>
+                                            <button type="button" class="dropdown-item" (click)="toggle()" data-utility="open"><i
+                                                    data-eva="info"></i>Information</button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="middle" id="scroll">
+                            <div class="container" id="msgwindow">
+                                <ul>
+                                    <li class="alert alert-danger" *ngIf = "!messages||messages.length==0">
+                                                    <strong>No Messages Sent!!</strong> 
+                                    </li>
+                                    <li *ngFor="let msg of messages">
+                                        <div class="receiver" [ngClass]="{'receiver':msg.sender_id!=user.user_id,
+                                             'sender': msg.sender_id==user.user_id}">
+                                            <div *ngIf="msg.sender_id!=user.user_id">
+                                                <img *ngIf="!msg.sender||!msg.sender.avatar_image" src="assets/img/avatar.svg"
+                                                    alt="avatar">
+                                                <img *ngIf="msg.sender&&msg.sender.avatar_image" src="{{msg.sender.avatar_image}}"
+                                                    alt="avatar">
+
+                                            </div>
+                                            <div class="content">
+
+
+                                                <div class="message">
+
+                                                    <div class="bubble" [ngClass]="{'bubble':msg.sender_id!=user.user_id,
+                                                        'bubble2': msg.sender_id==user.user_id}">
+                                                        <div *ngIf="msg.sender_id!=user.user_id">{{msg.sender.first_name}}</div>
+                                                        <!-- <div class="attachment" *ngIf="msg.type == 2&&msg.image_url">
+                                                            <img src="{{msg.image_url}}" data-toggle="tooltip"
+                                                                data-placement="left" title="Click here to Download">
+                                                        </div> -->
+                                                        <div class="attachment"
+                                                        *ngIf="msg.type == 2&&msg.image_url">
+                                                        <a href="{{msg.image_url}}" target="_blank">
+                                                            <img *ngIf="msg.imageTag == 'png' || msg.imageTag == 'jpg' || msg.imageTag == 'jpeg'"
+                                                                src="{{msg.image_url}}" data-toggle="tooltip"
+                                                                data-placement="left"
+                                                                title="Click here to Download"> </a>
+                                                        <a href="{{msg.image_url}}" target="_blank">
+                                                            <img *ngIf="msg.imageTag != 'png' && msg.imageTag != 'jpg' && msg.imageTag != 'jpeg'"
+                                                                src="assets/img/pdf.png" data-toggle="tooltip"
+                                                                data-placement="left"
+                                                                title="Click here to Download"></a>
+                                                    </div>
+                                                        <p>{{msg.text}}</p>
+                                                    </div>
+
+                                                </div>
+                                                <span>{{msg.createdAt | dateFormatPipe}}</span>
+                                            </div>
+                                        </div>
+
+
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="bottom">
+                                <div class="bot-text">
+                                    <textarea class="form-control" placeholder="Type message..." rows="1"
+                                        [(ngModel)]="message.text"></textarea>
+                                    <button type="submit" class="btn prepend" (click)="sendMsg()"><i
+                                            class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                                    <button type="button" class="btn prepend pin" data-toggle="modal"(click)="message.type=2"
+                                        data-target="#imageUp"><i class="fa fa-paperclip"
+                                            aria-hidden="true"></i></button>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Start of Utility -->
+                    <div class="utility" *ngIf="show_dialog">
+                        <div class="container">
+                            <button type="button" class="close" (click)="toggle()"><i class="fa fa-times"
+                                    aria-hidden="true"></i></button>
+                            <button type="button" class="btn primary" data-toggle="modal" data-target="#editGroup">Add
+                                people</button>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" [(ngModel)]="conversation_type"(ngModelChange)="twoWayMessanger($event)" class="custom-control-input" id="customSwitch1">
+                                <label class="custom-control-label" for="customSwitch1">Two Way Chat</label>
+                            </div>
+                            <ul class="nav" role="tablist">
+                                <li><a href="#users" class="active" data-toggle="tab" role="tab" aria-controls="users"
+                                        aria-selected="true">Users</a></li>
+
+                            </ul>
+                            <div class="tab-content">
+                                <!-- Start of Users -->
+                                <div class="tab-pane fade active show" id="users" role="tabpanel">
+                                    <h4>Users</h4>
+                                    <hr>
+                                    <ul class="users">
+                                        <li *ngFor="let member of groupInfo.members">
+                                            <div class="status online"><img src="{{member.user_info.avatar_image}}"
+                                                    alt="avatar"><i data-eva="radio-button-on"></i></div>
+                                            <div class="content">
+                                                <h5>{{member.user_info.first_name}}</h5>
+                                                <span>{{member.user_info.last_name}}</span>
+                                            </div>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                        data-eva="more-vertical"></i></button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <button type="button" class="dropdown-item">Edit</button>
+                                                    <button type="button" class="dropdown-item">Share</button>
+                                                    <button type="button" class="dropdown-item">Delete</button>
+                                                </div>
+                                            </div>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                                <!-- End of Users -->
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of Utility -->
+                </div>
+            </div>
+            <!-- End of Chat Room -->
+
+        </div>
+    </div>
+    <!-- End of Chat -->
+    <!-- Start of Compose -->
+    <div class="modal fade" id="compose" tabindex="-1" role="dialog" aria-labelledby="compose" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Create Group</h5>
+                    <button type="button" class="btn round" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav" role="tablist">
+                        <li><a href="#details" class="active" data-toggle="tab" role="tab" aria-controls="details"
+                                aria-selected="true">Details</a></li>
+                        <li><a href="#participants" data-toggle="tab" role="tab" aria-controls="participants"
+                                aria-selected="false">Participants</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- Start of Details -->
+                        <div class="details tab-pane fade show active" id="details" role="tabpanel">
+                            <div>
+                                <div class="form-group">
+                                    <label>Group Name</label>
+                                    <input type="text" class="form-control" [(ngModel)]="groupData.conversation_name"
+                                        placeholder="Enter Group Name">
+                                </div>
+                                <div class="form-group">
+
+                                    <span class="resume">
+                                        <app-image [type]='3' [parentSubject]="parentDocSubject" multiple="false"
+                                            (onChange)="changeGroupImage($event)"></app-image>
+
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of Details -->
+                        <!-- Start of Participants -->
+                        <div class="participants tab-pane fade" id="participants" role="tabpanel">
+                            <!-- <div class="search">
+                                    <form>
+                                        <input type="search" class="form-control" placeholder="Search">
+                                        <button type="submit" class="btn prepend"><i data-eva="search"></i></button>
+                                    </form>
+                                </div> -->
+                            <h4>Users</h4>
+                            <hr>
+                            <ul class="users" *ngIf="job&&job.search_response.filter_applications">
+                                <li *ngFor="let member of job.search_response.filter_applications">
+                                    <div class="status online"><img src="{{member.user_detail.avatar_image}}"
+                                            alt="avatar"><i data-eva="radio-button-on"></i></div>
+                                    <div class="content">
+                                        <h5>{{member.user_detail.first_name}}</h5>
+                                        <span>{{member.user_detail.last_name}}</span>
+                                    </div>
+                                    <input type="checkbox" [(ngModel)]="member.isSelected"
+                                        style="    width: 16px;height: 16px;" class="">
+
+                                </li>
+
+                            </ul>
+                        </div>
+                        <!-- End of Participants -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" (click)="createGroup()" class="btn primary">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Compose -->
+
+    <!-- ===============EDIT GROUP ===================== -->
+    <div class="modal fade" id="editGroup" tabindex="-1" role="dialog" aria-labelledby="compose" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Edit Group</h5>
+                    <button type="button" class="btn round" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav" role="tablist">
+                        <li><a href="#editForm" class="active" data-toggle="tab" role="tab" aria-controls="details"
+                                aria-selected="true">Details</a></li>
+                        <li><a href="#applican" data-toggle="tab" role="tab" aria-controls="participants"
+                                aria-selected="false">Participants</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- Start of Details -->
+                        <div class="details tab-pane fade show active" id="editForm" role="tabpanel">
+                            <div>
+                                <div class="form-group">
+                                    <label>Group Name</label>
+                                    <input type="text" class="form-control" [(ngModel)]="groupData.conversation_name"
+                                        placeholder="Enter Group Name">
+                                </div>
+                                <div class="form-group">
+
+                                    <span class="resume">
+                                        <app-image [type]='1' *ngIf="!groupData.conversation_image"  multiple="false"
+                                            (onChange)="changeGroupImage($event)"></app-image>
+                                            <div *ngIf="groupData.conversation_image" style="display: flex;justify-content: center;">
+                                                    <div class="cross" (click)="remove()"><small>X</small></div>
+
+                                                    <img    src="{{groupData.conversation_image}}" style="width:150px">
+                                            </div>
+                                            
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of Details -->
+                        <!-- Start of Participants -->
+                        <div class="participants tab-pane fade" id="applican" role="tabpanel">
+                            <!-- <div class="search">
+                                    <form>
+                                        <input type="search" class="form-control" placeholder="Search">
+                                        <button type="submit" class="btn prepend"><i data-eva="search"></i></button>
+                                    </form>
+                                </div> -->
+                            <h4>Users</h4>
+                            <hr>
+                            <ul class="users" *ngIf="job&&job.search_response.filter_applications">
+                                <li *ngFor="let member of job.search_response.filter_applications">
+                                    <div class="status online"><img src="{{member.user_detail.avatar_image}}"
+                                            alt="avatar"><i data-eva="radio-button-on"></i></div>
+                                    <div class="content">
+                                        <h5>{{member.user_detail.first_name}}</h5>
+                                        <span>{{member.user_detail.last_name}}</span>
+                                    </div>
+                                    <input type="checkbox" [(ngModel)]="member.isSelected"
+                                        style="    width: 16px;height: 16px;" class="">
+
+                                </li>
+
+                            </ul>
+                        </div>
+                        <!-- End of Participants -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" (click)="editGroup()" class="btn primary">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ===============END EDIT GROUP ===================== -->
+
+    <!-- ===============IMAGE UPLOAD TEXTAREA ===================== -->
+
+    <div class="modal fade" id="imageUp" tabindex="-1" role="dialog" aria-labelledby="compose" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Send Message</h5>
+                    <button type="button" class="btn round" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="tab-content">
+                        <!-- Start of Details -->
+                        <div class="details tab-pane fade show active" id="details" role="tabpanel">
+                            <div class="form-group">
+                                <label>Title</label>
+                                <textarea type="text" class="form-control" [(ngModel)]="message.text"
+                                    placeholder="What's the topic?"></textarea>
+
+                            </div>
+                            <div class="form-group">
+
+                                <span class="resume">
+                                    <app-image [type]='3' multiple="false" [parentSubject]="parentDocSubject"
+                                        (onChange)="changeAttachment($event)"></app-image>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn primary" data-dismiss="modal" [disabled]="!message.image_url" (click)="sendMsg()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ===============IMAGE UPLOAD TEXTAREA END===================== -->
+
+</div>
+<!-- Layout -->
+
+

@@ -1,0 +1,12 @@
+.active-chat{background-color: #eee;}
+.filter.direct.active .content p{color: #18d26e}
+.cross {
+    position: absolute;
+    left: 65%;
+    background: #ffa602;
+    width: 18px;
+    height: 20px;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+}

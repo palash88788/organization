@@ -1,0 +1,65 @@
+.choose-post h6 {
+    font-family: Poppins;
+    font-size: calc(16px + 1.4vw);
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.48;
+    letter-spacing: normal;
+    text-align: center;
+    color: #2d2d2d;
+}
+
+.post-inner h5 {
+    font-family: Poppins;
+    font-size: calc(12px + 0.6vw);
+    letter-spacing: normal;
+    text-align: center;
+    color: #2d2d2d;
+    padding-bottom: 16px;
+}
+
+.post-inner h6 {
+    font-family: Poppins;
+    font-size: calc(11px + 0.4vw);
+    letter-spacing: normal;
+    text-align: center;
+    color: #2d2d2d;
+}
+
+.post-inner {
+    padding: 43px 23px;
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-footer {
+    border-top: none;
+}
+
+.inside-post-form .form-group {
+    margin-bottom: 2rem;
+}
+
+.inside-post-form .content-wrap {
+    width: 85%;
+    margin: 0 auto;
+}
+
+textarea {
+    border: 1px solid #61d56d;
+    border-radius: 4px;
+}
+
+select.form-control {
+    border: 1px solid #61d56d;
+    border-radius: 4px;
+    height: calc(1.8rem + 2px);
+    padding: 0 7px;
+}
+
+.modal-open {
+    overflow: auto !important;
+}

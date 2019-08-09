@@ -1,0 +1,6 @@
+.receiver {
+    justify-content: flex-start;
+    text-align: left;
+}
+.active-chat{background-color: #eee;}
+.filter.direct.active .content p{color: #18d26e}

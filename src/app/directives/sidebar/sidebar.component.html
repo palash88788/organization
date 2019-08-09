@@ -1,0 +1,16 @@
+<div class="overlay"></div>
+
+<aside>
+    <div class="sidebar">
+
+        <ul class="list-unstyled">
+            <li><a href="javascript:;" routerLink="/pages/home" routerLinkActive="link-active"><i class="fa fa-user"></i> DASHBOARD <i class="fa fa-chevron-right"></i></a></li>
+            <li><a href="javascript:;" routerLink="/pages/jobs" routerLinkActive="link-active"><i class="fa fa-flask"></i> JOBS <i class="fa fa-chevron-right"></i></a></li>
+            <li><a href="javascript:;" [routerLink]="['/pages/profile',user_id]" routerLinkActive="link-active"><i class="fa fa-list"></i>Profile<i class="fa fa-chevron-right"></i></a></li>
+            <li><a href="javascript:;" [routerLink]="['/pages/filter-list']" routerLinkActive="link-active"><i class="fa fa-list"></i>Filter List<i class="fa fa-chevron-right"></i></a></li>
+            <li><a href="javascript:;" [routerLink]="['/pages/subsription-list']" routerLinkActive="link-active"><i class="fa fa-sign-in"></i>Subscription<i class="fa fa-chevron-right"></i></a></li>
+        </ul>
+
+        <button class="btn btn-login" (click)="logout()">logout</button>
+    </div>
+</aside>

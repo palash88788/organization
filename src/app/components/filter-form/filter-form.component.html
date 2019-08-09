@@ -1,0 +1,200 @@
+<div class="container-fluid">
+    <div class="row height-full">
+        <div class="col-md-12 div-width">
+            <form [formGroup]="JobFilterForm" (ngSubmit)="onFilter()">
+             
+                    <div class="signup-wrap">
+                  
+                            <div class="content-heading">
+                                <p>Filter</p>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>NAME</label>
+                                        <input type="text" class="form-control" name="title" formControlName="title">
+                                     
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>LOCATION/ADDRESS</label>
+                                        <input placeholder="Enter Your Location" formControlName="address" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Job Start</label>
+
+                                        <ejs-datepicker id='datepicker' [allowEdit]="false" placeholder='Select a date' [min]='minStartDate' formControlName="job_start"></ejs-datepicker>
+                                        <div *ngIf="formService.validate(JobFilterForm,'job_start')" class="invalid-feed">
+                                            Please enter job start date
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Job End</label>
+                                        <ejs-datepicker id='datepicker' [allowEdit]="false" placeholder='Select a date' [min]='minEndDate' formControlName="job_end"></ejs-datepicker>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>JOB INTERVIEW START TIME<span class="text-danger">*</span></label>
+    
+                                            <input [owlDateTime]="interview_start_time" [owlDateTimeTrigger]="interview_start_time" class="form-control" placeholder="Start Time" formControlName="interview_start_time">
+                                            <owl-date-time [pickerType]="'timer'" [pickerMode]="'dialog'" #interview_start_time></owl-date-time>
+                                            <div *ngIf="formService.validate(JobFilterForm,'interview_start_time')" class="invalid-feed">
+                                                Please enter job start date
+                                            </div>
+                                        </div>
+    
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>JOB INTERVIEW END TIME<span class="text-danger">*</span></label>
+    
+                                            <input [owlDateTime]="interview_end_time" [owlDateTimeTrigger]="interview_end_time" class="form-control" placeholder="End Time" formControlName="interview_end_time">
+                                            <owl-date-time [pickerType]="'timer'" [pickerMode]="'dialog'" #interview_end_time></owl-date-time>
+    
+                                        </div>
+    
+                                    </div>
+    
+                                </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Deadline</label>
+
+                                        <ejs-datepicker id='datepicker' [allowEdit]="false" placeholder='Select a date' [min]="minEndDate" [max]="maxDeadLineDate" formControlName="job_apply_deadline"></ejs-datepicker>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>BLOOD GROUP</label>
+                                        <select class="form-control custom-select" name="blood_group" formControlName="blood_group">
+                            <option></option>
+                              <option>+O </option>
+                              <option>-O </option>
+                              <option>+A </option>
+                              <option>-A</option>
+                              <option>+B </option>
+                              <option>-B</option>
+                              <option>+AB </option>
+                              <option>-AB</option>
+                            </select>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Educations</label>
+
+                                        <ng-multiselect-dropdown class="form-control" [placeholder]="'Select Educations'" [data]="educData" formControlName="education_level" [settings]="dropdownEdu" (onSelect)="onItemSelectEducations($event)">
+                                        </ng-multiselect-dropdown>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Skills</label>
+
+                                        <ng-multiselect-dropdown class="form-control" [placeholder]="'Select Skills'" [data]="listdata" formControlName="interest" [settings]="dropdownSettings" (onSelect)="onItemSelectInterest($event)">
+                                        </ng-multiselect-dropdown>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>LANGUAGES</label>
+                                        <ng-multiselect-dropdown class="form-control" name="lang" [placeholder]="'Select Languages'" formControlName="languages" [data]="langData" [settings]="dropdownLang" (onSelect)="onItemSelectLang($event)">
+                                        </ng-multiselect-dropdown>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>HOBBIES</label>
+                                        <ng-multiselect-dropdown class="form-control" name="hobbie_name" [placeholder]="'Select Hobbies'" [data]="hobbydata" formControlName="hobbie" [settings]="dropdownHobby" (onSelect)="onItemSelectHobby($event)">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row ">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <label>description</label>
+
+                                        <textarea rows="4" class="form-control" cols="50" style="height: auto !important;" formControlName="desc" required>
+                                                     
+                                                        </textarea>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label style="display:block;width:100%;">GENDER</label>
+                                        <mat-checkbox formControlName="male" style="margin-right:12px;">Male</mat-checkbox>
+                                        <mat-checkbox formControlName="female">Female</mat-checkbox>
+                                        <!-- <mat-radio-group aria-label="Select an option" formControlName="gender">
+                                            <mat-radio-button value="1" style="margin-left: 12px;">Male</mat-radio-button>
+                                            <mat-radio-button value="2" style="margin-left: 12px;">Female</mat-radio-button>
+                                        </mat-radio-group> -->
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+
+                                </div>
+                            </div>
+                      
+                        <div class="footer text-center ">
+                            <button type="submit " class="btn btn-login ">Create</button>
+                        </div>
+                    </div>
+
+                s
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="backdrop" [ngStyle]="{'display':display2}"></div>
+<div class="modal" tabindex="-1" aria-hidden="true" role="dialog" [ngStyle]="{'display':display2}">
+    <div class="modal-dialog  modal-dialog-centered modal-sm">
+        <div class="modal-content dialog card-wrap">
+            <div class="modal-header heading-none popup1">
+            </div>
+            <div class="modal-body heading-mes text-center">
+                <h4 style="font-size: 15px;font-weight: 600;">{{message}}</h4>
+            </div>
+            <div class="modal-footer footer-mes popup2 text-center" id="loginScreen">
+                <button type="button" class="btn btn-default" (click)="hidePop()">Ok</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal! -->

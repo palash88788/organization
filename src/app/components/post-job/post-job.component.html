@@ -1,0 +1,192 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 div-width">
+            <form [formGroup]="JobPostForm" (ngSubmit)="onRegister()">
+                <div class="inside-post-form px-5 mb-4">
+                    <div class="post-job-wrap">
+                        <div class="content-wrap">
+                            <div class="content-heading">
+                                <h2>Create New Job</h2>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>job name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" formControlName="job_name" required>
+                                        <div *ngIf="formService.validate(JobPostForm,'job_name')" class="invalid-feed">
+                                            Please enter job name
+                                        </div>
+                                        <!-- <ejs-datepicker id='datepicker' placeholder='Select a date' [value]='dateValue' [min]='minDate' [max]='maxDate'></ejs-datepicker> -->
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>JOB LOCATION <span class="text-danger">*</span></label>
+                                        <input placeholder="Enter Your Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" formControlName="address" class="form-control" #search >
+                                       
+                                        <div *ngIf="formService.validate(JobPostForm,'address')" class="invalid-feed">
+                                            Please enter job location
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>JOB START DATE<span class="text-danger">*</span></label>
+                                        <ejs-datepicker id='datepicker' [allowEdit]="false" type="date" placeholder='Select a date' [value]='dateValue' [min]='minStartDate' formControlName="job_start_date"></ejs-datepicker>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>JOB End DATE<span class="text-danger">*</span></label>
+                                        <ejs-datepicker id='datepicker' [allowEdit]="false" placeholder='Select a date' [value]='dateValue' [min]='minEndDate' formControlName="job_end_date"></ejs-datepicker>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>JOB INTERVIEW START TIME<span class="text-danger">*</span></label>
+
+                                        <input [owlDateTime]="interview_start_time" [owlDateTimeTrigger]="interview_start_time" class="form-control" placeholder="Start Time" formControlName="interview_start_time">
+                                        <owl-date-time [pickerType]="'timer'" [pickerMode]="'dialog'" #interview_start_time></owl-date-time>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>JOB INTERVIEW END TIME<span class="text-danger">*</span></label>
+
+                                        <input [owlDateTime]="interview_end_time" [owlDateTimeTrigger]="interview_end_time" class="form-control" placeholder="End Time" formControlName="interview_end_time">
+                                        <owl-date-time [pickerType]="'timer'" [pickerMode]="'dialog'" #interview_end_time></owl-date-time>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Application Deadline<span class="text-danger">*</span></label>
+
+
+                                        <ejs-datepicker id='datepicker' [allowEdit]="false" placeholder='Select a date' [value]='dateValue' [min]="minEndDate" [max]="maxDeadLineDate" formControlName="application_deadline"></ejs-datepicker>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>applicants required <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" formControlName="no_applicants_required" required>
+                                        <div *ngIf="formService.validate(JobPostForm,'no_applicants_required')" class="invalid-feed">
+                                            Please enter applicants
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <label>Job Type <span class="text-danger">*</span></label>
+                                        <select class="custom-select" class="form-control" formControlName="job_type">
+                                                        <option selected>Choose One...</option>
+                                                        <option value="1">Full Time</option>
+                                                        <option value="2"> Half Time</option>
+                                                     
+                                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Skills</label>
+
+
+                                        <ng-multiselect-dropdown name="city" class="form-control" [placeholder]="'Select Skills'" [data]="listdata" formControlName="interests" [settings]="dropdownSettingsInterest" (onSelect)="onItemSelectInterest($event)">
+                                        </ng-multiselect-dropdown>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Upload JOb Doc<span class="text-danger">*</span></label>
+                                        <app-image [type]='2' (onChange)="changeAttachment($event)"></app-image>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <label>description <span class="text-danger">*</span></label>
+
+                                        <textarea rows="4" class="form-control" cols="50" formControlName="desc" style="    height: auto !important;" required>
+                                             
+                                                </textarea>
+                                        <div *ngIf="formService.validate(JobPostForm,'desc')" class="invalid-feed">
+                                            Please enter description
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="footer text-center">
+                                        <button [disabled]="JobPostForm.invalid" type="submit" value="send" class="btn btn-login">Create </button>
+                                    </div>
+                                </div>
+
+                               
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<div class="backdrop" [ngStyle]="{'display':display2}"></div>
+<div class="modal" tabindex="-1" aria-hidden="true" role="dialog" [ngStyle]="{'display':display2}">
+    <div class="modal-dialog  modal-dialog-centered modal-sm">
+        <div class="modal-content dialog card-wrap">
+            <div class="modal-header heading-none popup1">
+            </div>
+            <div class="modal-body heading-mes text-center">
+                <h4 style="font-size: 15px;font-weight: 600;">{{message}}</h4>
+            </div>
+            <div class="modal-footer footer-mes popup2 text-center" id="loginScreen">
+                <button type="button" class="btn btn-default" (click)="hidePop()">Ok</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal! -->

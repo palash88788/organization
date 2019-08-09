@@ -1,0 +1,104 @@
+<section class="new-job">
+    <div class="jobdiv" style="    display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 17px 7px;">
+        <h4> Current Subscription List</h4>
+
+        <a class="Search-ad form-control" [routerLink]="['/subscription']" type="buttn" class="btn btn-job">Buy Subscription</a>
+
+    </div>
+
+    <div class="row my-2">
+        <div class="col-sm-12 col-md-12">
+
+            <div class="card job-card">
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-4">
+
+                            <h5 class="card-title">{{prevSubscription?.latest?.masterDetail?.subscription_name}} &nbsp;</h5>
+
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="card-title"><strong>DESCRIPTION</strong><br> <span>{{prevSubscription?.latest?.masterDetail.subscription_desc}}</span></h5>
+                        </div>
+                     
+
+                    </div>
+                    <div class="row" style="padding-top: 8px;">
+
+                        <div class="col-md-12 time">
+                            <div class="row ">
+                                <div class="col-md-2" style="border-right:1px solid grey"><strong>BULK SMS</strong><br>{{prevSubscription?.latest?.bulk_sms}} </div>
+                                <div class="col-md-2" style="border-right:1px solid grey"><strong>USER FILTER COUNT</strong><br>{{prevSubscription?.latest?.filter_user_count}} </div>
+                                <div class="col-md-2" style="border-right:1px solid grey"><strong>NO. OF JOB FILTER</strong><br>{{prevSubscription?.latest?.no_of_job_filter}}</div>
+                                <div class="col-md-2" style="border-right:1px solid grey"><strong>MESSANGER</strong><br><span *ngIf = "prevSubscription?.latest?.isMessenger == 1">ENABLE</span>
+                                    <span *ngIf = "prevSubscription?.latest?.isMessenger == 2">DISABLE</span></div>
+
+                                <div class="col-md-2" style="border-right:1px solid grey"><strong>PURCHASED DATE</strong><br>{{prevSubscription?.latest?.buyDate| date}}</div>
+                                <div class="col-md-2" style="border-right:1px solid grey"><strong>EXPIRY DATE</strong><br>{{ exp | date }}</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- ************** Previous Subscription List*******************  -->
+
+<div class="col-sm-12 ">
+    <div class="table-responsive ">
+        <div class="new-job  pt-4 pb-4">
+            <h4> Previous Subscription List</h4>
+        </div>
+
+        <table class="table ">
+            <thead>
+                <tr>
+                 
+                    <th scope="col " class="text-center ">Name</th>
+
+                    <th scope="col ">Price</th>
+                    <th scope="col ">Created Date</th>
+                    <th scope="col ">Duration</th>
+                    <th scope="col ">Expiry Date</th>
+
+
+                </tr>
+
+
+
+            </thead>
+
+
+            <tbody *ngIf="!prevSubscription.previous || prevSubscription.previous.length == 0 ">
+                <tr>
+                    <th colspan="6" class="text-center p-4" style="color:red;">No Subscription Found</th>
+                </tr>
+            </tbody>
+            <tbody *ngIf="prevSubscription.previous && prevSubscription.previous.length > 0 ">
+                <tr *ngFor="let prev of prevSubscription.previous">
+
+                    <td> {{ prev.masterDetail.subscription_name}}</td>
+                    <td> {{ prev.transaction.amount/100}}</td>
+                    <td> {{ prev.transaction.createdAt | dateFormatPipe}}</td>
+                    <td> {{ prev.durations.month}} Month</td>
+                    <td> {{ prev.expiredAt | dateFormatPipe}}</td>
+
+
+                </tr>
+
+
+            </tbody>
+
+
+        </table>
+    </div>
+</div>

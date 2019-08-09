@@ -1,0 +1,159 @@
+<div class="dashboard-info mt-4">
+    <div class="content-wrap">
+        <div class="row">
+
+            <div class="col-md-12">
+                <app-image [type]='1' (onChange)="changeAvatarImage($event)" [parentSubject]="parentSubject"></app-image>
+
+                <div class="content-heading pt-2">
+                    <p>Update Profile</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Organization Name <span class="text-danger">*</span></label>
+                    <input type="text" id="first_name" #first_name="ngModel" class="form-control" required [(ngModel)]="profile.first_name" [ngModelOptions]="{standalone: true}" placeholder="First Name">
+                    <div *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)">
+                        <div class="invalid-feed" *ngIf="first_name.errors.required">
+                            Organization Nameis required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Organization Email<span class="text-danger">*</span></label>
+                    <input type="email" id="email_id" #email_id="ngModel" class="form-control" required [(ngModel)]="profile.email_id" [ngModelOptions]="{standalone: true}">
+                    <div *ngIf="email_id.invalid && (email_id.dirty || email_id.touched)">
+                        <div class="invalid-feed" *ngIf="email_id.errors.required">
+                            Organization Email is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Contact Number <span class="text-danger">*</span></label>
+                    <input type="text" id="contact_no" #contact_no="ngModel" class="form-control" [(ngModel)]="profile.contact_no" [ngModelOptions]="{standalone: true}" required minlength="10" maxlength="15" onkeypress="if(this.value.length==15) return false;return event.charCode >= 48 && event.charCode <= 57 ||event.charCode == '.' || event.charCode == 250 ">
+                    <div *ngIf="contact_no.invalid && (contact_no.dirty || contact_no.touched)">
+                        <div class="invalid-feed" *ngIf="contact_no.errors.required">
+                            Organization Contact is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Current Location </label>
+                    <input placeholder="Enter Your Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [(ngModel)]="locationAddress">
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Registration Id</label>
+                    <input type="text" class="form-control" required [(ngModel)]="profile.organization_info.registration_id" [ngModelOptions]="{standalone: true}">
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Registration Url</label>
+                    <input type="text" class="form-control" required [(ngModel)]="profile.organization_info.registration_url" [ngModelOptions]="{standalone: true}">
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Organization Type</label>
+
+                    <select class="custom-select" class="form-control" required [(ngModel)]="profile.organization_info.organization_type" [ngModelOptions]="{standalone: true}">
+                                <option selected>Choose One...</option>
+                                <option value="1">Public</option>
+                                <option value="2"> Private</option>
+                             
+                                </select>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="social">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Social media</h4>
+                </div>
+                <div class="col-md-6">
+                    <button class="master-btn" (click)="addSocialMedia()">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="align-items: center;" *ngFor="let c of social_medias; let i = index">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label>Social Media </label>
+                    <input type="text" class="form-control" [(ngModel)]="c.social_media">
+
+                </div>
+            </div>
+
+
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label>Social Media Url</label>
+                    <input type="text" class="form-control" [(ngModel)]="c.social_url" [ngModelOptions]="{standalone: true}">
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="rigt-side">
+                    <button class="master-btn " (click)="removeSocialMedia(i,c)">-</button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="footer text-center mb-4">
+            <button type="submit" [disabled]="first_name.invalid || email_id.invalid || contact_no.invalid " class="btn btn-login" (click)="onSubmit()">Update </button>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="backdrop" [ngStyle]="{'display':display2}"></div>
+<div class="modal" tabindex="-1" aria-hidden="true" role="dialog" [ngStyle]="{'display':display2}">
+    <div class="modal-dialog  modal-dialog-centered modal-sm">
+        <div class="modal-content dialog card-wrap">
+            <div class="modal-header heading-none popup1">
+            </div>
+            <div class="modal-body heading-mes text-center">
+                <h4 style="font-size: 15px;font-weight: 600;">{{message}}</h4>
+            </div>
+            <div class="modal-footer footer-mes popup2 text-center" id="loginScreen">
+                <button type="button" class="btn btn-default" (click)="hidePop()">Ok</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal! -->

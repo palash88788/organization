@@ -1,0 +1,185 @@
+<div class="page-wrapper-ext">
+    <!--Page Body Start-->
+    <div class="page-body-wrapper">
+        <!--Page Sidebar Start-->
+        <div class="page-sidebar custom-scrollbar">
+        </div>
+        <!--Page Sidebar Ends-->
+        <div class="page-body">
+            <div class="container-fluid">
+                <!-- <div class="image-loader">
+                    <img src="assets/img/loader.gif" />
+                </div> -->
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="head-adhoc" style="padding-left: 6px;">
+                            <h3>Organization Detail</h3>
+                        </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container-fluid starts -->
+        <div class="vd_content-section clearfix">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="panel widget light-widget panel-bd-top">
+                        <div class="panel-heading no-title"> </div>
+                        <div class="panel-body">
+                            <div class="text-center vd_info-parent"> <img src="{{profile.avatar_image}}" class="prof-img"> </div>
+                            <div class="row">
+                                <div class="col-xs-12 pb-2" style="text-align: center;">
+                                    <h4 class="font-semibold mgbt-xs-5" style="font-weight: 700;">{{profile.first_name}} &nbsp; {{profile.last_name}} </h4>
+                                </div>
+                                    <div class="col-xs-12">
+                                    <a class="btn vd_btn vd_bg-green btn-xs btn-block no-br" [routerLink]="['/pages/profile-update',profile.user_id]" style="color:white" download="file.txt">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+                                    </a>
+                                </div>
+                                <!-- <div class="col-xs-12 p-1">
+                                    <a class="btn vd_btn vd_bg-green btn-xs btn-block no-br" style="color:white" download="file.txt">
+                                        <i class="fa fa-download append-icon"></i> RESUME
+                                    </a>
+                                </div> -->
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <!-- panel widget -->
+                    <!-- panel widget -->
+                </div>
+                <div class="col-sm-9">
+                    <div class="tabs">
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#profile-tab" role="tab" aria-controls="nav-home" aria-selected="true">Profile</a>
+
+                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#location-tab" role="tab" aria-controls="nav-contact" aria-selected="false">Location</a>
+
+                            <a class="nav-item nav-link" id="nav-social-tab" data-toggle="tab" href="#social-tab" role="tab" aria-controls="nav-social" aria-selected="false">Social Media</a>
+                        </div>
+                        <div class="tab-content">
+                            <div id="profile-tab" class="tab-pane active">
+                                <div class="pd-20">
+                                    <h3 class="mgbt-xs-15 mgtp-10 font-semibold"><i class="fa fa-user mgr-10 profile-icon"></i> ABOUT
+                                    </h3>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row mgbt-xs-0">
+                                                <label class="col-xs-5 control-label">Organization Name:</label>
+                                                <div class="col-xs-7 controls">{{profile.first_name}}</div>
+                                                <!-- col-sm-10 -->
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-12">
+                                            <div class="row mgbt-xs-0">
+                                                <label class="col-xs-5 control-label">Organization Contact:</label>
+                                                <div class="col-xs-7 controls">{{profile.contact_no}}</div>
+                                                <!-- col-sm-10 -->
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <div class="row mgbt-xs-0">
+                                                <label class="col-xs-5 control-label">Organization Email:</label>
+                                                <div class="col-xs-7 controls">{{profile.email_id}}</div>
+                                                <!-- col-sm-10 -->
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <hr class="pd-10">
+                                    <!-- <div class="row">
+                                        <div class="col-sm-12 mgbt-xs-20">
+                                            <h3 class="mgbt-xs-15 font-semibold"><i class="fa fa-globe mgr-10 profile-icon"></i> Social
+                                            </h3>
+
+                                            <div class="pd-20">
+
+                                                <a href="https://www.facebook.com/" target="_blank" class="chip-side">
+                                                    <div class="chip" *ngFor="let social of profile.social_medias">
+                                                        {{social?.social_media}}
+                                                    </div>
+                                                </a>
+
+
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <!-- row -->
+                                    <!-- row -->
+                                </div>
+                                <!-- pd-20 -->
+                            </div>
+                            <!-- home-tab -->
+
+
+                            <div id="location-tab" class="tab-pane">
+                                <div class="py-3 table-responsive">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                        
+                                                <th>Address</th>
+                                                <th>City</th>
+                                                <th>State</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                            <ng-container>
+                                                <tr *ngFor="let loc of profile.locations">
+                                        
+                                                    <td>{{loc.address}}</td>
+                                                    <td>{{loc.city}}</td>
+                                                    <td>{{loc.state}},{{loc.country}}</td>
+                                                </tr>
+                                            </ng-container>
+                                        </tbody>
+
+                                    </table>
+                                    <div class="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="social-tab" class="tab-pane">
+                                <div class="py-3">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                        
+                                                <th>Social</th>
+                                                <th>Url</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- <pre>{{profile.social_medias | json}}</pre> -->
+                                            <ng-container>
+                                                <tr *ngFor="let social of profile.social_medias">
+                                                    <td>{{social.social_media}}</td>
+                                                    <td>{{social.social_url}}</td>
+                                                    <!-- <td>{{social?.url}}</td> -->
+                                                </tr>
+                                            </ng-container>
+                                        </tbody>
+
+                                    </table>
+                                    <div class="">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- tab-content -->
+                    </div>
+                    <!-- tabs-widget -->
+                </div>
+            </div>
+            <!-- row -->
+        </div>

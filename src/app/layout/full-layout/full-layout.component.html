@@ -1,0 +1,19 @@
+<div class="wrapper">
+
+    <app-header></app-header>
+    <app-sidebar [user_id]="user_id"></app-sidebar>
+
+    <!-- Content_right -->
+    <div class="container_full">
+
+
+        <div class="content_wrapper">
+
+            <router-outlet></router-outlet>
+
+        </div>
+    </div>
+    <!-- Content_right_End -->
+    <app-footer></app-footer>
+
+</div>

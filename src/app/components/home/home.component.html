@@ -1,0 +1,76 @@
+<div class="card-warp">
+    <div class="row">
+        <div class="col-xl-3 col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="icon bg-color_blue">
+                    <i class="fa fa-users"></i>
+                </div>
+                <div class="info text-right">
+                    <strong>{{countData.count}}</strong>
+                    <span>Total Job</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="icon bg-color_red">
+                    <i class="fa fa-user"></i>
+                </div>
+                <div class="info text-right">
+                    <strong>{{dashBoardData?.accept_by_org}}</strong>
+                    <span>Total Job Accepted</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="icon bg-color_gray">
+                    <i class="fa fa-heart"></i>
+                </div>
+                <div class="info text-right">
+                    <strong>{{dashBoardData?.reject_by_org}}</strong>
+                    <span>Total Job Rejected</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="icon bg-color_blue">
+                    <i class="fa fa-user-plus"></i>
+                </div>
+                <div class="info text-right">
+                    <strong>{{dashBoardData?.accept_by_org}}</strong>
+                    <span>Number Of Filter</span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="dashboard-info mt-4">
+    <div class="row">
+        <div class="col-xl-8 col-sm-12">
+            <div class="card-wrap">
+                <div class="card-title">
+                   Job Analytics
+                </div>
+                <div style="display: block;">
+                    <canvas id="revenueChart" style="width: 100%"></canvas>
+
+                    <!-- [plugins]="barChartPlugins" -->
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-sm-12">
+            <!-- <div class="card-wrap">
+                <div class="card-title">
+                    top sponsers
+                </div>
+                <div class="empty-content">
+                    <b>No stats available</b>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>

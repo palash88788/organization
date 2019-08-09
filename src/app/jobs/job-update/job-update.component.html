@@ -1,0 +1,225 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 div-width">
+
+            <div class="inside-post-form px-5 mb-4">
+                <div class="post-job-wrap">
+                  
+                        <div class="content-heading">
+                            <h2>Update a Job</h2>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>job name <span class="text-danger">*</span></label>
+                                    <input type="text" id="job_name" #job_name="ngModel" class="form-control" [(ngModel)]="jobs.job_name" [ngModelOptions]="{standalone: true}" required>
+                                    <div *ngIf="job_name.invalid && (job_name.dirty || job_name.touched)">
+                                        <div class="invalid-feed" *ngIf="job_name.errors.required">
+                                            Job Name is required.
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>JOB LOCATION <span class="text-danger">*</span></label>
+                                    <input class="form-control" [(ngModel)]="jobs.address" [ngModelOptions]="{standalone: true}" ngx-google-places-autocomplete #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" />
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>JOB START date</label>
+                                    <ejs-datepicker id='datepicker' [allowEdit]="false" placeholder='Select a date' [min]='minEndDate' [(ngModel)]="jobs.job_start_date" [ngModelOptions]="{standalone: true}"></ejs-datepicker>
+
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>JOB End Date</label>
+                                    <ejs-datepicker id='datepicker' [allowEdit]="false" placeholder='Select a date' [min]='minEndDate' [(ngModel)]="jobs.job_end_date" [ngModelOptions]="{standalone: true}"></ejs-datepicker>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>JOB INTERVIEW TIME</label>
+
+                                    <input [owlDateTime]="interviewstarttime" [owlDateTimeTrigger]="interviewstarttime" class="form-control" [(ngModel)]="startTimeInterview" [ngModelOptions]="{standalone: true}">
+                                    <owl-date-time [pickerType]="'timer'" [pickerMode]="'dialog'" #interviewstarttime></owl-date-time>
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>JOB INTERVIEW END TIME</label>
+                                    <input [owlDateTime]="interviewendtime" [owlDateTimeTrigger]="interviewendtime" class="form-control" [(ngModel)]="EndTimeInterview" [ngModelOptions]="{standalone: true}">
+                                    <owl-date-time [pickerType]="'timer'" [pickerMode]="'dialog'" #interviewendtime></owl-date-time>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>applicants required <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="jobs.no_applicants_required" [ngModelOptions]="{standalone: true}" required>
+
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Application Deadline</label>
+                                    <ejs-datepicker id='datepicker' [allowEdit]="false" placeholder='Select a date' [min]='minEndDate' [(ngModel)]="jobs.application_deadline" [ngModelOptions]="{standalone: true}"></ejs-datepicker>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                            
+
+                                <div class="form-group">
+                                    <label>Skills</label>
+                                    <ng-multiselect-dropdown style="height:auto !important;" [placeholder]="'Select Interest'" class="form-control" [data]="listdata" [(ngModel)]="jobs.Job_interest_detail" [settings]="dropdownSettingsInterest" (onSelect)="onInterestItemSelect($event)" (onDeSelect)="onInterestDeSelect($event)">
+                                        <option *ngFor="let interestData of serverInterests" [value]="interestData.interest_id">
+                                            {{interestData.interest_name}}
+                                        </option>
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label>Job Type <span class="text-danger">*</span></label>
+                                    <select class="custom-select" class="form-control" [(ngModel)]="jobs.job_type" [ngModelOptions]="{standalone: true}">
+                                                    <option selected>Choose One...</option>
+                                                    <option value="1">Full Time</option>
+                                                    <option value="2"> Half Time</option>
+                                                 
+                                                    </select>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label>Upload JOb Doc<span class="text-danger">*</span></label>
+
+                                    <app-image [type]='2' (onChange)="changeAttachment($event)"[multiple]="true"></app-image>
+                                <div *ngIf="jobs.docs&&jobs.docs.length>0" style="display: flex;">
+                                    <div *ngFor="let doc of jobs.docs;let j =index "style="position: relative;">
+                                            <div class="cross" (click)="remove(j)"><small>X</small></div>
+
+                                            <a href="{{doc.job_doc_url}}" target="_blank " >
+ 
+                                                    <img *ngIf="doc.imageTag == 'png' || doc.imageTag == 'jpg' || doc.imageTag == 'jpeg'"
+                                                        src="{{doc.job_doc_url}}" data-toggle="tooltip"
+                                                        data-placement="left"
+                                                        style="  width: 50px;
+                                                        height: 50px;"
+                                                        title="Click here to Download"> 
+
+                                                    </a>
+    
+                                                <a href="{{doc.job_doc_url}}" target="_blank" style="position: relative;">
+ 
+                                                    <img *ngIf="doc.imageTag != 'png' && doc.imageTag != 'jpg' && doc.imageTag != 'jpeg'"
+                                                        src="assets/img/pdf.png" data-toggle="tooltip"
+                                                        data-placement="left"
+                                                        style="    width: 50px;"
+                                                        title="Click here to Download"></a>
+                                    </div>
+                                       
+                                  </div>
+                                </div>
+                            </div>
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+    
+                                        <label>description <span class="text-danger">*</span></label>
+    
+                                        <textarea rows="4" cols="50" [(ngModel)]="jobs.desc" [ngModelOptions]="{standalone: true}" required>
+                                                                 
+                                                                    </textarea>
+    
+                                    </div>
+                                </div>
+
+                      
+
+
+
+                        </div>
+
+                        <div class="row">
+                        <div class="col-md-12">
+                            <div class="footer text-center">
+                                <button type="submit" (click)="onRegister()" [disabled]="job_name.invalid" value="send" class="btn btn-login">Update </button>
+                            </div>
+                        </div>
+                        </div>
+
+
+                  
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="backdrop" [ngStyle]="{'display':display2}"></div>
+<div class="modal" tabindex="-1" aria-hidden="true" role="dialog" [ngStyle]="{'display':display2}">
+    <div class="modal-dialog  modal-dialog-centered modal-sm">
+        <div class="modal-content dialog card-wrap">
+            <div class="modal-header heading-none popup1">
+            </div>
+            <div class="modal-body heading-mes text-center">
+                <h4 style="font-size: 15px;font-weight: 600;">{{message}}</h4>
+            </div>
+            <div class="modal-footer footer-mes popup2 text-center" id="loginScreen">
+                <button type="button" class="btn btn-default" (click)="hidePop()">Ok</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal! -->

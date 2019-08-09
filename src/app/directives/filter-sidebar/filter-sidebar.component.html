@@ -1,0 +1,22 @@
+<div class="overlay"></div>
+
+<aside>
+    <div class="sidebar">
+        <div class="imglog">
+            <ul class="list-unstyled">
+                <li><a href="javascript:;" routerLink="/pages/filter-list" routerLinkActive="link-active"><i class="fa fa-chevron-left"></i> Filter List </a></li>
+            </ul>
+        </div>
+        <ul class="list-unstyled">
+
+
+            <li><a [routerLink]="['/filter/filter-detail',filter_id]" routerLinkActive="link-active"><i class="fa fa-flask"></i> Filter Detail <i class="fa fa-chevron-right"></i></a></li>
+
+            <li><a href="javascript:;" [routerLink]="['/filter/applicants-filter',filter_id]" routerLinkActive="link-active"><i class="fa fa-user"></i>Applicant Filter List<i class="fa fa-chevron-right"></i></a></li>
+
+            <li><a href="javascript:;" *ngIf="isApply" [routerLink]="['/filter/chat-desk-filter',filter_id]" routerLinkActive="link-active"><i class="fa fa-user"></i>Messanger <i class="fa fa-chevron-right"></i></a></li>
+        </ul>
+
+
+    </div>
+</aside>

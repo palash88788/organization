@@ -1,0 +1,188 @@
+<div class="col-sm-12 ">
+    
+        <button type="button " class="btn add-btn " data-toggle="modal "
+            data-target=".bd-example-modal-sm ">Applicants</button>
+        <button class="pull-right Delete"  (click)="onSelect()">Select</button>
+
+        <!-- <input type="search" [(ngModel)]="nameSearch.first_name" [ngModelOptions]="{standalone: true}" class="Search-ad form-control" placeholder="Search" /> -->
+        <div class="table-responsive ">
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th scope="col " class="text-center "><span style="min-width: 120px"><input type="checkbox"  class="mr-2" [(ngModel)]="isAllSelect"
+                            (change)="allApplicantSelect($event.target.checked)">Select</span> </th>
+                    <th scope="col " class="text-center ">User</th>
+
+                    <th scope="col "><span style="min-width: 120px">First Name</span></th>
+                    <th scope="col ">Last Name</th>
+                    <!-- <th scope="col ">Email Id</th>
+                    <th scope="col ">contact No</th> -->
+                    <th scope="col ">Status</th>
+                    <th scope="col ">Action</th>
+                </tr>
+
+
+
+            </thead>
+
+
+            <tbody>
+
+                <tr *ngFor="let filter of applicantUserLists">
+
+                    <td> <input type="checkbox" [disabled]="filter.isChecked" [(ngModel)]="filter.isSelected"
+                            (click)="applicantSelect(filter,$event.target.checked)"></td>
+                    <td><img src="{{filter.avatar_image}}" style=" width: 29px; "></td>
+                    <td><span style="min-width: 120px"> {{filter.first_name}}</span> </td>
+                    <td>{{filter.last_name}}</td>
+                    <td>
+                        <span *ngIf="filter.status==2" style="color:#1cda34;min-width: 120px">Accepted</span>
+                        <span *ngIf="filter.status==3" style="color:#ef0828;min-width: 120px">Rejected</span>
+                        <span *ngIf="filter.status==1" style="color:#1cda34;min-width: 120px">Request Sent</span>
+
+                        <span *ngIf="!filter.isChecked" style="color:#ef0828;min-width: 150px">Request Not Send</span>
+                    </td>
+                    <td>
+                        <a (click)="onView(filter)"><i class="fa fa-eye">
+
+                            </i></a>
+                    </td>
+                    <!-- <td>{{filter.email_id}}</td>
+                    <td>{{filter.contact_no}}</td> -->
+
+                </tr>
+
+
+                <!-- <tr>
+                    <td colspan="6"> <button class="Delete" (click)="onSelect()">Select</button></td>
+                </tr> -->
+
+            </tbody>
+
+
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="backdrop" [ngStyle]="{'display':display2}"></div>
+<div class="modal" tabindex="-1" aria-hidden="t
+rue" role="dialog" [ngStyle]="{'display':display2}">
+    <div class="modal-dialog  modal-dialog-centered modal-sm">
+
+        <div class="modal-content dialog card-wrap">
+
+            <div class="modal-body heading-mes text-center">
+
+                <mat-checkbox [(ngModel)]="filter_status.smsChecked" name="smsChecked" style="margin-right:12px;">By SMS
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="filter_status.emailChecked" name="emailChecked">By Email</mat-checkbox>
+
+            </div>
+            <div class="modal-footer footer-mes popup2 text-center" id="loginScreen">
+                <button type="submit" (click)="onSubmit()" class="btn btn-default Delete">Submit</button>
+                <button type="submit" (click)="onCancel()" class="btn btn-default Delete">Cancel</button>
+
+            </div>
+        </div>
+
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal! -->
+
+<!-- =============================User List Pop Up================= -->
+
+
+<div class="backdrop" [ngStyle]="{'display':display4}"></div>
+<div class="modal" tabindex="-1" aria-hidden="t
+rue" role="dialog" [ngStyle]="{'display':display4}">
+    <div class="modal-dialog  modal-dialog-centered modal-lg">
+
+        <div class="modal-content dialog card-wrap">
+
+            <div class="modal-body heading-mes text-center">
+
+                <!-- Container-fluid starts -->
+                <div class="vd_content-section clearfix">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="panel widget light-widget panel-bd-top">
+                                <div class="panel-heading no-title"> </div>
+                                <div class="panel-body">
+                                    <div class="text-center vd_info-parent"> <img src="" class="prof-img"> </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 pb-2" style="text-align: center;">
+                                            <img src="{{selectedApplicant?.avatar_image}}" style="width:70px">
+                                            <h4 class="font-semibold mgbt-xs-5" style="font-weight: 700;">
+                                                {{selectedApplicant?.first_name}} &nbsp; {{selectedApplicant?.last_name}}
+                                            </h4>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="tabs">
+                                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
+                                        href="#profile-tab" role="tab" aria-controls="nav-home"
+                                        aria-selected="true">Profile</a>
+
+
+
+
+                                </div>
+                                <div class="tab-content">
+                                    <h5>Skills</h5>
+                                    <ul>
+                                        <li *ngFor="let skill of selectedApplicant?.user_interests">
+                                            {{skill.interest.interest_name}}
+                                        </li>
+                                    </ul>
+                                    <h5>Languages</h5>
+                                    <ul>
+                                        <li *ngFor="let lan of selectedApplicant?.languages">
+                                            {{lan.language.language_name}}
+                                        </li>
+                                    </ul>
+                                    <h5>Hobbies</h5>
+                                    <ul>
+                                        <li *ngFor="let ho of selectedApplicant?.user_hobbies">
+                                            {{ho.hobbie.hobbie_name}}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- tab-content -->
+                            </div>
+                            <!-- tabs-widget -->
+                        </div>
+                    </div>
+                    <!-- row -->
+                </div>
+
+            </div>
+            <div class="modal-footer footer-mes popup2 text-center" id="loginScreen">
+                <button type="submit" (click)="onHide()" class="btn btn-default Delete">Close</button>
+            </div>
+        </div>
+
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal! -->

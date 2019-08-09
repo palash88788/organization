@@ -1,0 +1,19 @@
+<div class="wrapper">
+
+    <app-header></app-header>
+    <app-job-detail-sidebar [job_id]="job_id"></app-job-detail-sidebar>
+
+    <!-- Content_right -->
+    <div class=" container_full ">
+
+
+        <div class="content_wrapper ">
+
+            <router-outlet></router-outlet>
+
+        </div>
+    </div>
+    <!-- Content_right_End -->
+    <app-footer></app-footer>
+
+</div>

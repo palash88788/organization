@@ -1,0 +1,86 @@
+<!-- <div class="image" *ngIf="type==1">
+
+    <input type="file" id="fileupload" #fileInput ng2FileSelect [uploader]="uploader" (change)="fileInput.value=''">
+    <div class="image_single">
+        <span *ngFor="let i of responses">
+        <img *ngIf="i.file.rawFile.type.match('image/*')" src="{{i.data.secure_url}}">
+        </span>
+        <img src="{{imagesrc}}" *ngIf="imagesrc">
+
+    </div>
+    <div class="remove" (click)="removeSelectedFile(index)" *ngIf="imagesrc"><i class="fa fa-times" aria-hidden="true"></i>
+    </div>
+</div> -->
+
+
+<div class="avatar-upload" *ngIf="type==1">
+    <div class="avatar-preview">
+        <div style="background-image: url(assets/img/noimage.jpg);" class="preview-img-wrap">
+
+            <img src="{{imagesrc}}" *ngIf="imagesrc">
+            <span *ngFor="let i of responses" class="preview-img">
+          
+                <img *ngIf="i.file.rawFile.type.match('image/*')" src="{{i.data.secure_url}}">
+                </span>
+            <div class="div_upload_image">
+                <i class="fa fa-camera"></i>
+                <input type="file" id="fileupload" class="hide_image_file" #fileInput ng2FileSelect [uploader]="uploader" (change)="fileInput.value=''" multiple style="cursor: pointer;" />
+                <!-- <div class="remove" (click)="removeSelectedFile(index)" *ngIf="imagesrc"><i class="fa fa-times" aria-hidden="true"></i>
+        </div> -->
+                <label for="imageUpload"></label>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="file-upload" *ngIf="type==2">
+    <div class="file-select">
+
+        <input type="file" id="fileupload" #fileInput ng2FileSelect [uploader]="uploader" (change)="fileInput.value=''" multiple /> </div>
+    <span class="resume">Upload</span>
+    <div>
+            <div class="img_multi multi_preview">
+            <span *ngFor= "let job of filePreview">
+                    <div class="cross" (click)="remove(j)"><small>X</small></div>
+                      <img src="{{job.job_doc_url}}" >
+                 
+                  </span>
+                </div>
+        <div class="img_multi multi_preview">
+            
+            <span *ngFor="let i of responses">
+                
+                <div class="cross" (click)="remove(j)"><small>X</small></div>
+             
+        <img *ngIf="i.file.rawFile.type.match('image/*')" src="{{i.data.secure_url}}">
+        <img *ngIf="!i.file.rawFile.type.match('image/*')" src="/assets/img/pdf.png">
+        </span>
+        </div>
+    </div>
+</div>
+
+<div class="file-upload2" *ngIf="type==3">
+    <div class="file-select2">
+
+        <!-- <div class="file-select-name" style="padding-left: 10px;
+
+            position: absolute;" *ngIf="file_previewData">{{file_previewData}}</div> -->
+            
+         
+        <input type="file" id="fileupload" #fileInput ng2FileSelect [uploader]="uploader" (change)="fileInput.value=''" multiple /> </div>
+    <span class="resume">Upload</span>
+    <div>
+        <div class="img_multi">
+            <span *ngFor="let i of responses;let j =index">
+                
+            <div class="cross" (click)="remove(j)"><small>X</small></div>
+        <img *ngIf="i.file.rawFile.type.match('image/*')" src="{{i.data.secure_url}}">
+        <img *ngIf="!i.file.rawFile.type.match('image/*')" src="/assets/img/pdf.png">
+ 
+        </span>
+        </div>
+    </div>
+
+</div>

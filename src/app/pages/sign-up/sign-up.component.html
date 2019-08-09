@@ -1,0 +1,212 @@
+<!-- <div class="image-loader" *ngIf="imageLoader">
+    <img src="assets/img/adhoc.gif" />
+</div> -->
+<div class="container-fluid">
+    <div class="row height-full">
+        <div class="col-md-12 div-width">
+            <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+                <div class="inside-form-sign-up px-5">
+                    <div class="signup-wrap">
+                        <div class="content-wrap">
+                            <div class="content-heading">
+                                <div class="imglog m1">
+                                    <img src="assets/img/final.png" alt="logo">
+                                </div>
+                                <h2>Sign Up</h2>
+                                <p>Organization</p>
+                            </div>
+                            <!-- selectpicker -->
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+
+                                    <app-image [type]='1' (onChange)="changeAvatarListener($event)"></app-image>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group ">
+                                        <label>Organization Type</label>
+                                        <select class="form-control" formControlName="organization_type">
+                                            <!-- <option selected value="">Please select organization type</option> -->
+                                            <option value="1">Public</option>
+                                          <option value="2">Private</option>
+                </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Name<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="text" formControlName="first_name" placeholder="Name" required>
+                                        <div *ngIf="formService.validate(registerForm,'first_name')" class="invalid-feed">
+                                            Please enter a valid name
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Registration Id<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="text" formControlName="registration_id" placeholder="Registration Id" required>
+                                        <div *ngIf="formService.validate(registerForm,'registration_id')" class="invalid-feed">
+                                            Please enter a valid registration Id
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Password<span class="text-danger">*</span></label>
+                                        <input type="password" minlength="6" class="form-control" formControlName="password" placeholder="Password" required>
+                                        <div *ngIf="formService.validate(registerForm,'password')" class="invalid-feed">
+                                            Please enter a valid password
+                                        </div>
+                                        <div *ngIf="formService.validate(registerForm,'password')">Password must be at least 6 characters</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Organization Email<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="txtEmail" formControlName="email_id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Organization Email" required>
+                                        <div *ngIf="formService.validate(registerForm,'email_id')" class="invalid-feed">
+                                            Please enter a valid Organization Email
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <label>Contact Information<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="contact_information" formControlName="contact_no" placeholder="Contact info" required minlength="10" maxlength="15" onkeypress="if(this.value.length==15) return false;return event.charCode >= 48 && event.charCode <= 57 ||event.charCode == '.' || event.charCode == 250 "
+                                            required>
+                                        <div *ngIf="formService.validate(registerForm,'contact_no')" class="invalid-feed">
+                                            Please enter a valid Contact Information
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <label>Address<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="address" formControlName="address" placeholder="Address" required>
+                                        <div *ngIf="formService.validate(registerForm,'address')" class="invalid-feed">
+                                            Please enter a valid Address
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
+                            <!-- <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Facebook</label>
+                                        <input type="text" class="form-control" name="facebook" formControlName="facebook" required>
+                                        <div *ngIf="formService.validate(registerForm,'facebook')" class="invalid-feed">
+                                            Please enter a valid
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>website</label>
+                                        <input type="text" class="form-control" name="website" formControlName="website" required>
+                                        <div *ngIf="formService.validate(registerForm,'website')" class="invalid-feed">
+                                            Please enter a valid
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <!-- <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Other</label>
+                                        <input type="text" class="form-control" name="other" formControlName="other" required>
+                                        <div *ngIf="formService.validate(registerForm,'other')" class="invalid-feed">
+                                            Please enter a valid
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Twitter</label>
+                                        <input type="text" class="form-control" name="twitter" formControlName="twitter" required>
+                                        <div *ngIf="formService.validate(registerForm,'twitter')" class="invalid-feed">
+                                            Please enter a valid
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="row">
+                                <!-- <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="btn-top">
+                                   
+                                            <button type="submit" value="send" class="btn btn-login sm-btn">+                                           
+                                                 <input type="file" accept="image/*" formControlName="url" name="images">
+                                            </button>
+                                            <span class="side-text">Scanned Copy</span>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                            <div class="error text-center p-4"> {{message?.error}}</div>
+                            <div class="footer text-center">
+                                <button type="submit" value="send" class="btn btn-login" [disabled]="registerForm.invalid">Sign up </button>
+                                <div class="mt-3 signup">
+                                    Existing User? &nbsp;<a href="javascritpt:void(0);" [routerLink]="['/']">Sign in</a>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="backdrop" [ngStyle]="{'display':display2}"></div>
+<div class="modal" tabindex="-1" aria-hidden="t
+rue" role="dialog" [ngStyle]="{'display':display2}">
+    <div class="modal-dialog  modal-dialog-centered modal-sm">
+        <div class="modal-content dialog card-wrap">
+
+            <div class="modal-body heading-mes text-center">
+                <h4 style="font-size: 15px;font-weight: 600;">{{message}}</h4>
+            </div>
+            <div class="modal-footer footer-mes popup2 text-center" id="loginScreen">
+                <button type="button" class="btn btn-default" (click)="hidePop()">Ok</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal! -->

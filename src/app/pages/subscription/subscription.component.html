@@ -1,0 +1,103 @@
+<div class="max-pos">
+    <div class="container pb-3">
+        <div class="sol-logo-right pad-b-4">
+            <h3>Our Offering</h3>
+        </div>
+        <a class="Search-ad form-control"[routerLink]="['/pages/subsription-list']" type="buttn" class="btn btn-job">Back</a>
+        <div class="row row-flex-wrap pt-4 mx-md-0 mb-4">
+            <div class="col-md-4  flex-col mb-4" *ngFor="let subs of subscriptionData;let i=index">
+                <div class="offer-col">
+                    <div class="before-box white-bg">
+                        <p>{{subs?.subscription_name}}</p>
+                    </div>
+                    <div class="offer-inner-section">
+                        <div class="offer-title">
+                            <h6>{{subs?.subscription_name}}</h6>
+                            <p>{{subs?.subscription_desc}}</p>
+                        </div>
+                        <div class="offer-content">
+                            <p>Bulk SMS: {{subs?.feature.bulk_sms}}</p>
+                            <p>User Filter Count: {{subs?.feature.filter_user_count}}</p>
+                            <p>No. of Job Filter: {{subs?.feature.no_of_job_filter}}</p>
+
+                        </div>
+                    </div>
+
+                    <div class="list-wrap" *ngIf="(!subs || subs.durations.length > 0)&&subs.isOneTime==2">
+                        <select class="form-control" (change)="onDurationChange($event.target.value,i)">
+                            <option *ngFor="let subs1 of subs.durations" [value]="subs1.subscription_duration_id" >{{subs1?.duration_name}}</option>
+          
+                        </select>
+                    </div>
+
+                    <div class="offer-content" *ngIf="subs.duration">
+                        <p>Monthly Price: {{subs.duration.monthly_price}}</p>
+                        <p>Total Price: {{subs.duration.total_price}}</p>
+                    </div>
+
+                    <div class="bottom-offer">
+                        <div class="btn_offer">
+                            <a (click)="selectValue(subs)"  angular4-paystack [key]="'pk_test_936d8cdd139d3f2dad1ade3cd6621a92b66ae75e'" [email]="emailID" [amount]="subscription.amount" [ref]="subs.trxref" [class]="'btn btn-primary'" (close)="paymentCancel()" (callback)="paymentDone($event)">Choose Plan</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md-4 flex-col p-md-0 mb-md-0 mb-4">
+                <div class="offer-col  center-col">
+                    <div class="before-box green-bg">
+                        <p>Accelerator</p>
+                    </div>
+                    <div class="offer-inner-section  center-inner">
+                        <div class="offer-title">
+                            <h6>$29 user/month</h6>
+                            <p>(6 Months Term)</p>
+                        </div>
+                        <div class="offer-content">
+                            <p>Publish up to 10<br>products/experiences</p>
+                            <p>Professional Profile</p>
+                            <p>Marketplace visibility in <br>search results</p>
+                            <p>Products suggested by <br> Supermatchers</p>
+                            <p>Dashboards and analytics for <br> order management </p>
+                            <p>Chat with customers</p>
+                        </div>
+                    </div>
+                    <div class="bottom-offer">
+                        <p>10% commission on each product sales</p>
+                        <div class="btn_offer">
+                            <a href="#">Choose Plan</a>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="col-md-4 flex-col p-md-0 mb-md-0 mb-4">
+                <div class="offer-col">
+                    <div class="before-box purple-bg">
+                        <p>Proselectd</p>
+                    </div>
+                    <div class="offer-inner-section">
+                        <div class="offer-title">
+                            <h6>$99 user/month</h6>
+                            <p>(6 Months Term)</p>
+                        </div>
+                        <div class="offer-content">
+                            <p>Publish up to 50<br>products/experiences</p>
+                            <p>Professional Profile</p>
+                            <p>Marketplace visibility in <br>search results</p>
+                            <p>Products suggested by <br> Supermatchers</p>
+                            <p>Dashboards and analytics for <br> order management </p>
+                            <p>Chat with customers</p>
+                            <p>If you would like to publish more products / experiences please Contact Us directly</p>
+                        </div>
+                    </div>
+                    <div class="bottom-offer">
+                        <p>10% commission on each product sales</p>
+                        <div class="btn_offer">
+                            <a href="#">Choose Plan</a>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>

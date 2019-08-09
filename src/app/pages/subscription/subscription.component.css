@@ -1,0 +1,241 @@
+.max-pos {
+    position: relative;
+}
+
+.left-img-design img {
+    max-width: 300px;
+    margin-left: -22px;
+    margin-bottom: -25px;
+}
+
+.center-col {
+    transform: scale(1.1);
+    z-index: 1;
+    position: relative;
+}
+
+.center-inner {
+    transform: scale(0.88);
+}
+
+.center-col .bottom-offer {
+    transform: scale(0.9);
+}
+
+.btn_offer {
+    padding-bottom: 32px;
+    cursor: pointer;
+}
+
+.offer-col {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.13);
+    background: #fff;
+    height: 100%;
+    position: relative;
+    padding-bottom: 92px;
+    ;
+}
+
+.offer-inner-section {
+    text-align: center;
+    padding: 0 10px;
+}
+
+.offer-title {
+    padding: 74px 0;
+}
+
+.offer-title h6 {
+    font-size: calc(14px + 0.6vw);
+    font-family: Philosopher;
+    font-weight: bold;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 0;
+}
+
+.offer-title {
+    padding-bottom: 34px;
+}
+
+.offer-content p {
+    font-family: Philosopher;
+    font-size: calc(13px + 0.2vw);
+    line-height: 1.06;
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: #000000;
+    padding: 6px 12px;
+}
+
+.bottom-offer p {
+    font-family: Philosopher;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.8;
+    letter-spacing: 0.2px;
+    text-align: center;
+    color: #000000;
+    font-size: calc(13px + 0.2vw);
+}
+
+.btn_offer a {
+    font-family: Philosopher;
+    font-size: calc(15px + 0.1vw);
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.07;
+    letter-spacing: 0.4px;
+    text-align: center;
+    color: #fff;
+    padding: 10px 28px;
+    background-image: linear-gradient(to right, #5abd78, #245e2a);
+    display: inline-block;
+    border-radius: 34px;
+}
+
+.white-bg {
+    background-color: #f2ba01;
+    color: #fff;
+}
+
+.green-bg {
+    background: #3d7acb;
+    color: #fff;
+}
+
+.purple-bg {
+    background: #9d4beb;
+    color: #fff;
+}
+
+.before-box {
+    width: 100px;
+    height: 100px;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 42% 40%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 42% 40%);
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    z-index: 17;
+    border-radius: 5px;
+}
+
+.before-box p {
+    font-family: Philosopher;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0;
+    text-transform: capitalize;
+    font-size: calc(12px + 0.4vw);
+    transform: rotate(45deg);
+    padding-left: 28px;
+    padding-top: 15px;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-48%, -50%) rotate(45deg);
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.offer-col .bottom-offer {
+    padding-top: 40px;
+    position: absolute;
+    bottom: -5px;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    padding: 5px;
+}
+
+.offer-col.center-col .bottom-offer {
+    bottom: 30px;
+}
+
+.navbar-light .navbar-toggler {
+    z-index: 999999999;
+    padding: 0;
+}
+
+ul.navbar-nav.custom-cav.ml-auto.nav {
+    z-index: 1;
+}
+
+
+/* ======================================Offer-css-End================ */
+
+
+/* ========Footer======================= */
+
+.subscribe a {
+    font-family: Philosopher;
+    font-size: calc(15px + 0.1vw);
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.07;
+    letter-spacing: 0.4px;
+    text-align: center;
+    color: #fff;
+    padding: 10px 28px;
+    background-image: linear-gradient(to right, #8e2de2, #4a00e0);
+    margin-left: 10px;
+    border-radius: 50px;
+}
+
+.subscribe p {
+    font-family: Philosopher;
+    font-size: calc(12px + 0.2vw);
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: #565656;
+}
+
+.subscribe {
+    border-radius: 24px;
+    box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.28);
+    padding: 18px;
+    background: #fff;
+    position: absolute;
+    width: 80%;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.subscribe .form-control {
+    border-radius: 50px;
+    box-shadow: 0 1px 10px 0 rgba(127, 138, 242, 0.32);
+    background-color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    width: 40%;
+    display: initial;
+    margin-bottom: 5px;
+    height: 34px;
+    font-size: 14px;
+}
+
+.list-wrap {
+    padding: 16px 46px;
+}
+
+.sol-logo-right {
+    text-align: center;
+    padding-top: 25px;
+    color: #666666;
+    text-transform: capitalize;
+    font-weight: 700;
+}
+
+a.btn.btn-job {
+    background-color: #255e2b;
+    color: #fff;
+    margin-left: 7px;
+}

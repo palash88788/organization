@@ -1,0 +1,107 @@
+<section class="new-job">
+    <div class="jobdiv" style="    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;">
+        <h4> Job List</h4>
+        <input type="search" [(ngModel)]="nameSearch.job_name" [ngModelOptions]="{standalone: true}" class="Search-ad form-control" placeholder="Search" />
+        <button type="submit" value="send" class="btn btn-login" data-toggle="modal" data-target="#myModal">Create Job</button>
+
+    </div>
+    <div class="row my-2 text-center" *ngIf="!jobs || jobs?.length == 0">
+        <h4 style="margin: 0 auto; color:red">No Job Available </h4>
+    </div>
+    <div class="col-md-12" *ngIf="jobs || jobs?.length > 0">
+
+        <div class="row my-2" *ngFor="let job of jobs | personSearch :nameSearch">
+            <div class="col-sm-12 col-md-12">
+
+                <div class="card job-card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="card-title">{{job?.job_name}} &nbsp;
+                                    <span><i class="fa fa-map-marker" aria-hidden="true" style="color:#7eca86"></i>
+                                </span> &nbsp;<span>{{job?.address}}</span> </h5>
+                                <!-- <p>{{job?.orgnization_info.first_name}}</p> -->
+                            </div>
+                            <div class="col-md-3">
+                                <h5 class="card-title">Number of adhocs needed : <span>{{job?.no_applicants_required}}</span></h5>
+                            </div>
+                            <div class="col-md-3">
+                                <h5 class="card-title">Reply deadline : <span>{{job?.application_deadline | dateFormatPipe}}</span></h5>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 8px;">
+                                <div class="col-md-12">
+                                        <h5 class="card-text">{{job?.desc}} </h5>
+                                    </div>
+                        </div>
+                        <div class="row" style="padding-top: 8px;">
+                            
+                            <div class="col-md-8 m-3 time">
+                                <div class="row ">
+                                    <div class="col-md-4" style="border-right:1px solid grey">JOB INTERVIEW DURATION<br>{{job?.interview_start_time}} - {{job?.interview_end_time}} </div>
+                                    <div class="col-md-4" style="border-right:1px solid grey">JOB START DATE<br>{{job?.job_start_date | dateFormatPipe }}</div>
+                                    <div class="col-md-4">JOB END DATE<br>{{job?.job_end_date | dateFormatPipe}}</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <a [routerLink]="['/jobs/detail',job?.job_id]" type="buttn" class="btn btn-job">View</a>
+                                <a [routerLink]="['/jobs/job-update',job?.job_id]" type="buttn" class="btn btn-job">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
+            </div>
+            <div class="choose-post">
+                <h6>Choose Posting Type</h6>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="post-inner">
+                    <h5>ADVERTISEMENT</h5>
+                    <h6>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</h6>
+                    <div class="footer text-center">
+                        <a href="javascript:;" routerLink="/pages/post-job" type="submit" value="send" class="btn btn-login" data-dismiss="modal">ADVERTISEMENT </a>
+                    </div>
+                </div>
+
+
+                <div class="post-inner">
+                    <h5>REQUEST</h5>
+                    <h6>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</h6>
+                    <div class="footer text-center">
+
+                        <a href="javascript:;" routerLink="/pages/filter-form" type="submit" value="send" data-dismiss="modal" class="btn btn-login">REQUEST </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal footer -->
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-login" data-dismiss="modal">Close</button>
+            </div> -->
+
+        </div>
+    </div>
+</div>
